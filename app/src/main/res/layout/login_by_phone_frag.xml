@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/edtPhone"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Enter Phone..."
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/phone"
+        android:inputType="phone"
+        android:singleLine="true"
+        android:paddingLeft="16dp" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Enter Password..."
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/password"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:paddingLeft="16dp" />
+
+    <CheckBox
+        android:id="@+id/checkboxShowPswd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Show Password"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/secondary"
+        >
+    </CheckBox>
+
+    <TextView
+        android:id="@+id/txtForget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Forget Password?"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/primary"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+
+        android:textSize="16dp"
+        />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="LOGIN"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:layout_marginTop="18dp"
+        android:textSize="16dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="BACK"
+            android:backgroundTint="@color/transparentBlack"
+            android:textColor="@color/white"
+            android:layout_marginRight="4dp"
+            android:textSize="16dp"
+            />
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_weight="5"
+            android:layout_height="60dp"
+            android:text="REGISTER"
+            android:layout_marginLeft="4dp"
+            android:backgroundTint="@color/secondary"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            />
+    </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center_vertical"
+       android:orientation="horizontal">
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/info"
+           android:layout_marginRight="6dp"
+           />
+
+       <TextView
+           android:id="@+id/adminLoginText"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/adminLogin"
+           android:textSize="14dp"
+           android:textStyle="bold"
+           android:textColor="@color/primary"
+           />
+   </LinearLayout>
+
+</LinearLayout>

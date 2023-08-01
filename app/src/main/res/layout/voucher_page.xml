@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VoucherPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:src="@drawable/close"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank You"
+        android:textColor="@color/secondary"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="6dp"
+        />
+
+    <TextView
+        android:id="@+id/here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here is your voucher!"
+        android:textColor="@color/primary"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_textfield"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="180dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/l2"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/black" />
+
+            <!--        Order Id-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlue"
+                android:paddingVertical="6dp"
+                android:layout_marginHorizontal="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order Id "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+<!--            Cust Name-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cust. Name "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderName"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text=" Nico Robin"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+<!--            Cust Phone-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlue"
+                android:layout_marginHorizontal="2dp"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cust. Phone "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderPhone"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="09770939110"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Cust Address-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cust Address "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderAddress"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lanmataw 13 street, Kyount ta  tar township"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Total price-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlue"
+                android:layout_marginHorizontal="2dp"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Price "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderPrice"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="43000 MMK"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Total Qty-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Quantity "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderQty"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Payment -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlue"
+                android:layout_marginHorizontal="2dp"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payment Type "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderPayment"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cash On Delivery"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Books-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order Books "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderBooks"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="Green Lantern,No Way Home,Lastong Big-Heart"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Order Date -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlue"
+                android:layout_marginHorizontal="2dp"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Order Date "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderDate"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="31-7-2023"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <!--            Duration-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration "
+                    android:textColor="@color/secondary"
+                    android:paddingLeft="16dp"
+                    android:layout_weight="3"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/txtOrderDuration"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:paddingRight="16dp"
+                    android:layout_height="wrap_content"
+                    android:text="During 3 Days"
+                    android:layout_weight="2"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/black" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginBottom="6dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bar"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

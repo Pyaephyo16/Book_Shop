@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/adminOnline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/admin"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Online"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="2dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:background="@color/transparent"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/transparent"
+            android:layout_centerHorizontal="true"
+            android:innerRadius="0dp"
+            android:layout_gravity="center"
+            android:shape="ring"
+            android:thicknessRatio="0">
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="40dp"
+                android:scaleType="centerCrop"
+                android:layout_height="40dp"
+                android:src="@drawable/admin"
+                />
+        </androidx.cardview.widget.CardView>
+        <EditText
+            android:id="@+id/search"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/search_field"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:focusable="false"
+            android:clickable="true"
+            android:hint="Search"
+            android:gravity="center"
+            android:textColorHint="@color/black"
+            android:layout_height="40dp" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/cart"-->
+<!--            android:layout_width="34dp"-->
+<!--            android:layout_height="34dp"-->
+<!--            android:src="@drawable/cart"-->
+<!--            />-->
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/userCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        android:elevation="20dp"
+        app:cardBackgroundColor="@color/white"
+        android:padding="12dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/d2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Users"
+                android:layout_weight="3"
+                android:layout_marginHorizontal="12dp"
+                android:textColor="@color/primary"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="2dp"
+                />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/right"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/orderCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="22dp"
+        android:elevation="20dp"
+        app:cardBackgroundColor="@color/white"
+        android:padding="12dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/d1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                android:layout_weight="3"
+                android:layout_marginHorizontal="12dp"
+                android:textColor="@color/primary"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="2dp"
+                />
+
+            <ImageView
+                android:id="@+id/detail"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/right"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+<!--    Insert-->
+    <RelativeLayout
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:id="@+id/insertCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+
+            android:background="@drawable/four">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="25dp"
+                android:text="Insert Book"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/insertExpand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@color/transparent"
+                android:text="EXPAND ALL" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="-40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/d3"/>
+
+    </RelativeLayout>
+
+<!--    Update-->
+    <RelativeLayout
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:id="@+id/updateCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/three"
+            android:layout_marginTop="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update Book"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPAND ALL"
+                android:id="@+id/updateExpand"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:background="@color/transparent"
+                android:layout_alignParentBottom="true" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/d6"/>
+
+    </RelativeLayout>
+
+<!--    delete-->
+    <RelativeLayout
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:id="@+id/deleteCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/two"
+            android:layout_marginTop="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Book"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPAND ALL"
+                android:id="@+id/deleteExpand"
+                android:textColor="@color/white"
+                android:background="@color/transparent"
+                android:layout_alignParentBottom="true" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="-40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/d5"/>
+
+    </RelativeLayout>
+
+<!--    Promotion-->
+    <RelativeLayout
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:id="@+id/promotionCard"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/one"
+            android:layout_marginTop="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Promotion"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:padding="25dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXPAND ALL"
+                android:id="@+id/promotionExpand"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:background="@color/transparent"
+                android:layout_alignParentBottom="true" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="-40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/d4"/>
+
+    </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

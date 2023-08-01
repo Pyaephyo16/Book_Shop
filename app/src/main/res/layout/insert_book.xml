@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".InsertBook">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
+
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/back"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/l2"/>
+
+            <TextView
+                android:id="@+id/shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BOOK SHELF"
+                android:textSize="22dp"
+                android:textColor="@color/secondary"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INSERT BOOK SECTION"
+        android:textColor="@color/primary"
+        android:textSize="22dp"
+        android:layout_marginBottom="16dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="160dp"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/b"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="40dp"
+                android:text="* ID will be auto-generated"
+                android:textColor="@color/red"
+                android:textSize="16dp"
+                android:layout_marginBottom="16dp"
+                />
+
+            <EditText
+                android:id="@+id/edtTitle"
+                android:layout_width="match_parent"
+                android:background="@drawable/custom_textfield"
+                android:layout_height="50dp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:hint="Title..."
+                android:drawablePadding="6dp"
+                android:drawableStart="@drawable/book"
+                android:inputType="text"
+                android:singleLine="true"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="16dp" />
+
+
+            <EditText
+                android:id="@+id/edtAuthor"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/custom_textfield"
+                android:layout_height="50dp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:hint="Author..."
+                android:drawablePadding="6dp"
+                android:drawableStart="@drawable/person"
+                android:inputType="text"
+                android:singleLine="true"
+                android:paddingLeft="16dp" />
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtPrice"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="50dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Price...(MMK)"
+
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/price"
+        android:inputType="number"
+        android:singleLine="true"
+        android:paddingLeft="16dp" />
+
+    <EditText
+        android:id="@+id/edtPages"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="50dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Pages..."
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/page"
+        android:inputType="number"
+        android:singleLine="true"
+        android:paddingLeft="16dp" />
+
+    <EditText
+        android:id="@+id/edtStock"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="50dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Stock..."
+        android:drawablePadding="6dp"
+        android:drawableStart="@drawable/stock"
+        android:inputType="number"
+        android:singleLine="true"
+        android:paddingLeft="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_textfield">
+        <Spinner
+            android:id="@+id/typeSpinner"
+            android:layout_width="match_parent"
+            android:paddingLeft="12dp"
+            android:layout_height="40dp"
+            android:autofillHints="true"
+            android:backgroundTint="@color/primary"
+            android:backgroundTintMode="src_over"
+            android:dropDownWidth="match_parent"
+            android:popupBackground="@color/primary"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/white"
+            android:textSize="22dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtDescrption"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_textfield"
+        android:layout_height="120dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:hint="Write Description..."
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:paddingLeft="16dp" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:text="ADD"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="16dp"
+        android:backgroundTint="@color/secondary"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        />
+    </LinearLayout>
+</ScrollView>
