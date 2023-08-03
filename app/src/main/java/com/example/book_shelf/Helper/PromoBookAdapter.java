@@ -1,12 +1,12 @@
 package com.example.book_shelf.Helper;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -16,79 +16,59 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.book_shelf.BookDetailPage;
-import com.example.book_shelf.ChangeBookData;
-import com.example.book_shelf.DeleteBook;
-import com.example.book_shelf.HomePage;
 import com.example.book_shelf.Models.BookModel;
 import com.example.book_shelf.R;
+import com.example.book_shelf.Util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> implements Filterable {
+public class PromoBookAdapter extends RecyclerView.Adapter<PromoBookAdapter.ViewHolder> implements Filterable {
 
     Context context;
-    private List<BookModel> bookList;
+    List<BookModel> promoList;
+
     private List<BookModel> originalList;
 
-    //update = 1
-    //delete = 2
-    //search = 3
-    int backPage = 0;
-
-    public BookAdapter(Context context,List<BookModel> bookList,int backPage){
-            this.context = context;
-            this.bookList = bookList;
-            this.originalList = new ArrayList<>(bookList);
-            this.backPage = backPage;
+    public PromoBookAdapter(Context context,List<BookModel> promoList){
+        this.context = context;
+        this.promoList = promoList;
+        this.originalList = new ArrayList<>(promoList);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.book_item,parent,false);
+        View view = inflater.inflate(R.layout.promo_book,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BookModel model = bookList.get(position);
+        BookModel model = promoList.get(position);
 
         holder.bookTitle.setText(model.getTitle());
-        holder.bookAuthor.setText("Name : "+ model.getAuthor());
-
-        if (backPage==3){
-            if (model.getPromoPrice().equals("0")){
-                holder.bookPrice.setText("Pirce : "+model.getPrice()+" MMK");
-            }else{
-                holder.bookPrice.setText("Pirce : "+model.getPromoPrice()+" MMK");
-            }
-        }else{
-            holder.bookPrice.setText("Pirce : "+model.getPrice()+" MMK");
-        }
-
+        holder.bookPrice.setText("Pirce : "+model.getPrice()+" MMK");
         BitmapFactory.Options opt = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(model.getPicture(),opt);
         holder.book.setImageBitmap(bm);
 
-        holder.bookCard.setOnClickListener(new View.OnClickListener() {
+        holder.addToPromotion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (backPage == 1){
-                    Intent i =new Intent(v.getContext(), ChangeBookData.class);
-                    i.putExtra("bId",String.valueOf(model.getBookId()));
-                    v.getContext().startActivity(i);
-                }else if (backPage == 2){
-                    Intent i =new Intent(v.getContext(), DeleteBook.class);
-                    i.putExtra("bId",String.valueOf(model.getBookId()));
-                    v.getContext().startActivity(i);
-                }else if (backPage == 3){
-                    Intent i =new Intent(v.getContext(), BookDetailPage.class);
-                    i.putExtra("bookId",String.valueOf(model.getBookId()));
-                    i.putExtra("source","home");
-                    v.getContext().startActivity(i);
+                boolean isAlreadyInsert = false;
+                for (int type : Util.promoList) {
+                    if (type==model.getBookId()){
+                        isAlreadyInsert = true;
+                        break;
+                    }
+                }
+                if (isAlreadyInsert==true){
+                    Util.showToast(context,"Already Added to the promotion list!");
+                }else{
+                    Util.promoList.add(model.getBookId());
+                    Util.showToast(context,"Added to promotion list!");
                 }
             }
         });
@@ -96,7 +76,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
     @Override
     public int getItemCount() {
-        return bookList.size();
+        return promoList.size();
     }
 
     @Override
@@ -125,28 +105,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            bookList.clear();
-            bookList.addAll((List)results.values);
+            promoList.clear();
+            promoList.addAll((List)results.values);
             notifyDataSetChanged();
         }
     };
 
-
     class ViewHolder extends RecyclerView.ViewHolder{
+
         ImageView book;
         CardView bookCard;
-        TextView bookTitle,bookAuthor,bookPrice;
+        TextView bookTitle,bookPrice;
+        EditText addToPromotion;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            book =itemView.findViewById(R.id.book);
-            bookTitle = itemView.findViewById(R.id.bookTitle);
-            bookAuthor = itemView.findViewById(R.id.bookAuthor);
-            bookPrice = itemView.findViewById(R.id.bookPrice);
+            book = itemView.findViewById(R.id.book);
             bookCard = itemView.findViewById(R.id.bookCard);
+            bookTitle = itemView.findViewById(R.id.bookTitle);
+            bookPrice = itemView.findViewById(R.id.bookPrice);
+            addToPromotion = itemView.findViewById(R.id.addToPromotion);
         }
     }
 }
-
-
-

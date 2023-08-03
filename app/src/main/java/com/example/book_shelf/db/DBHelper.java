@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "store.db";
+    private static final String DB_NAME = "bookStore.db";
 
     ///Table Names
     private static final String userTable = "user";
@@ -42,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private String isAdmin = "isAdmin";
 
+    private String ownBook = "ownBook";
+
     ///bookTable field names
     private String bookId = "bId";
     private String bookTitle = "title";
@@ -52,6 +54,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private String bookPages = "pages";
     private String bookType = "type";
     private String bookStock = "stock";
+
+    private String promoPrice = "promoPrice";
+    private String promoPercent = "promoPercent";
+    private String promoName = "promoName";
 
 
     ///orderTable field names
@@ -82,6 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private String shelfBookDescription = "description";
     private String shelfBookPages = "pages";
     private String shelfBookType = "type";
+    private String shelfOrderDate = "orderDate";
 
 
     public DBHelper(Context context) {
@@ -90,10 +97,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-    String userCreate ="CREATE TABLE "+userTable+"("+userName+" TEXT,"+userPhone+" TEXT,"+userEmail+" TEXT,"+userPassword+" TEXT,"+userProfile+" TEXT,"+isAdmin+" TEXT)";
+    String userCreate ="CREATE TABLE "+userTable+"("+userName+" TEXT,"+userPhone+" TEXT,"+userEmail+" TEXT,"+userPassword+" TEXT,"+userProfile+" TEXT,"+isAdmin+" TEXT,"+ownBook+" INTEGER)";
         db.execSQL(userCreate);
 
-        String bookCreate = "CREATE TABLE "+bookTable+"("+bookId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+bookTitle+" TEXT,"+bookAuthor+" TEXT,"+bookPrice+" TEXT,"+bookPicture+" TEXT,"+bookDescription+" TEXT,"+bookPages+" TEXT,"+bookType+" TEXT,"+bookStock+" INTEGER)";
+        String bookCreate = "CREATE TABLE "+bookTable+"("+bookId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+bookTitle+" TEXT,"+bookAuthor+" TEXT,"+bookPrice+" TEXT,"+bookPicture+" TEXT,"+bookDescription+" TEXT,"+bookPages+" TEXT,"+bookType+" TEXT,"+bookStock+" INTEGER,"+promoPrice+" TEXT,"+promoPercent+" TEXT,"+promoName+" TEXT)";
         db.execSQL(bookCreate);
 
         String orderCreate = "CREATE TABLE "+orderTable+"("+orderId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+orderUserName+" TEXT,"+orderUserPhone+" TEXT,"+totalPrice+" TEXT,"+totalQuantity+" INTEGER,"+orderDate+" TEXT,"+orderAddress+" TEXT)";
@@ -102,7 +109,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String orderDetailCreate = "CREATE TABLE "+orderDetailTable+"("+orderDetailId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+orderDetailIdForOrder+" INTEGER,"+orderDetailBookId+" INTEGER,"+orderBookQuantity+" INTEGER,"+orderBookNTitle+" TEXT)";
             db.execSQL(orderDetailCreate);
 
-            String userShelfCreate = "CREATE TABLE "+shelfTable+"("+shelfId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+shelfUserPhone+" TEXT,"+shelfUserName+" TEXT,"+shelfBookId+" INTEGER,"+shelfBookTitle+" TEXT,"+shelfBookAuthor+" TEXT,"+shelfBookPrice+" TEXT,"+shelfBookPicture+" TEXT,"+shelfBookDescription+" TEXT,"+shelfBookPages+" TEXT,"+shelfBookType+" TEXT)";
+            String userShelfCreate = "CREATE TABLE "+shelfTable+"("+shelfId+" INTEGER PRIMARY KEY AUTOINCREMENT,"+shelfUserPhone+" TEXT,"+shelfUserName+" TEXT,"+shelfBookId+" INTEGER,"+shelfBookTitle+" TEXT,"+shelfBookAuthor+" TEXT,"+shelfBookPrice+" TEXT,"+shelfBookPicture+" TEXT,"+shelfBookDescription+" TEXT,"+shelfBookPages+" TEXT,"+shelfBookType+" TEXT,"+shelfOrderDate+" TEXT)";
             db.execSQL(userShelfCreate);
     }
 
@@ -128,6 +135,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(userPassword,password);
         contentValues.put(userProfile,profile);
         contentValues.put(isAdmin,"false");
+        contentValues.put(ownBook,0);
 
         database.insert(userTable,null,contentValues);
         database.close();
@@ -149,7 +157,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     userCursor.getString(2),
                     userCursor.getString(3),
                     userCursor.getString(4),
-                    userCursor.getString(5)
+                    userCursor.getString(5),
+                            userCursor.getInt(6)
                     )
                 );
             }while (userCursor.moveToNext());
@@ -171,14 +180,15 @@ public class DBHelper extends SQLiteOpenHelper {
                     userDetailCursor.getString(2),
                     userDetailCursor.getString(3),
                     userDetailCursor.getString(4),
-                    userDetailCursor.getString(5)
+                    userDetailCursor.getString(5),
+                    userDetailCursor.getInt(6)
             );
         }
         return model;
     }
 
     ///Update User
-    public void updateUser(String updateName,String updatePhone,String updateEmail,String updatePassword,String updateProfile){
+    public void updateUser(String updateName,String updatePhone,String updateEmail,String updatePassword,String updateProfile,int own){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
 
@@ -187,13 +197,14 @@ public class DBHelper extends SQLiteOpenHelper {
         content.put(userEmail,updateEmail);
         content.put(userPassword,updatePassword);
         content.put(userProfile,updateProfile);
+        content.put(ownBook,own);
 
         db.update(userTable,content,"phone=?",new String[]{updatePhone});
         db.close();
     }
 
     ///Add book
-    public void addBook(String title,String author,String price,String picture,String description,String pages,String type,int stock){
+    public void addBook(String title,String author,String price,String picture,String description,String pages,String type,int stock,String pPrice,String pPercent,String pName){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
 
@@ -205,13 +216,16 @@ public class DBHelper extends SQLiteOpenHelper {
         content.put(bookPages,pages);
         content.put(bookType,type);
         content.put(bookStock,stock);
+        content.put(promoPrice,pPrice);
+        content.put(promoPercent,pPercent);
+        content.put(promoName,pName);
 
         db.insert(bookTable,null,content);
         db.close();
     }
 
     ///Update book
-    public void updateBook(String id,String title,String author,String price,String picture,String description,String pages,String type,int stock){
+    public void updateBook(String id,String title,String author,String price,String picture,String description,String pages,String type,int stock,String pPrice,String pPercent,String pName){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
 
@@ -223,6 +237,9 @@ public class DBHelper extends SQLiteOpenHelper {
         content.put(bookPages,pages);
         content.put(bookType,type);
         content.put(bookStock,stock);
+        content.put(promoPrice,pPrice);
+        content.put(promoPercent,pPercent);
+        content.put(promoName,pName);
 
         db.update(bookTable,content,"bId=?",new String[]{id});
     }
@@ -254,7 +271,10 @@ public class DBHelper extends SQLiteOpenHelper {
                           cursor.getString(6),
                           cursor.getString(7),
                           cursor.getInt(8),
-                          1
+                          1,
+                          cursor.getString(9),
+                          cursor.getString(10),
+                          cursor.getString(11)
                   )
                 );
             }while (cursor.moveToNext());
@@ -280,7 +300,10 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getString(6),
                         cursor.getString(7),
                         cursor.getInt(8),
-                        1
+                        1,
+                        cursor.getString(9),
+                        cursor.getString(10),
+                        cursor.getString(11)
                 );
         }
         return model;
@@ -414,7 +437,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     ///Add User shelf
-    public void addUserShelf(String phone,String name,int bookId,String title,String author,String price,String picture,String description,String pages,String type){
+    public void addUserShelf(String phone,String name,int bookId,String title,String author,String price,String picture,String description,String pages,String type,String date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
 
@@ -428,6 +451,7 @@ public class DBHelper extends SQLiteOpenHelper {
         content.put(shelfBookDescription,description);
         content.put(shelfBookPages,pages);
         content.put(shelfBookType,type);
+        content.put(shelfOrderDate,date);
 
 
         db.insert(shelfTable,null,content);
@@ -455,7 +479,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                 cursor.getString(7),
                                 cursor.getString(8),
                                 cursor.getString(9),
-                                cursor.getString(10)
+                                cursor.getString(10),
+                                cursor.getString(11)
                         )
                 );
             }while (cursor.moveToNext());

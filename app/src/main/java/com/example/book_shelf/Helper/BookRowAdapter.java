@@ -59,7 +59,11 @@ public class BookRowAdapter extends RecyclerView.Adapter<BookRowAdapter.ViewHold
 //            }
 
             holder.bookTitle.setText(model.getTitle());
-            holder.bookPrice.setText(model.getPrice()+" MMK");
+            if (model.getPromoPrice().equals("0")){
+                holder.bookPrice.setText(model.getPrice()+" MMK");
+            }else{
+                holder.bookPrice.setText(model.getPromoPrice()+" MMK");
+            }
         BitmapFactory.Options opt = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(model.getPicture(),opt);
         holder.book.setImageBitmap(bm);

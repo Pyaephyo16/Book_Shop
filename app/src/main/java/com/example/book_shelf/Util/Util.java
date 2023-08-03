@@ -11,6 +11,9 @@ import java.util.List;
 public class Util {
 
     public static List<Integer> addToCardList = new ArrayList<>();
+
+    public static List<Integer> promoList = new ArrayList<>();
+
     public static int totalCost = 0;
 
     public static int tryCount = 0;

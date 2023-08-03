@@ -20,6 +20,12 @@
         android:theme="@style/Theme.BOOK_SHELF"
         tools:targetApi="31">
         <activity
+            android:name=".PromotionPage"
+            android:exported="false" />
+        <activity
+            android:name=".SearchForPromo"
+            android:exported="false" />
+        <activity
             android:name=".AdminUserView"
             android:exported="false" />
         <activity

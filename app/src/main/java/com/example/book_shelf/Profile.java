@@ -172,7 +172,8 @@ public class Profile extends AppCompatActivity implements Animation.AnimationLis
                 user.getPhone(),
                 user.getEmail(),
                 user.getPassword(),
-                realFilePath
+                realFilePath,
+                    user.getOwnBook()
             );
             Util.saveData(this,"phone",user.getPhone());
             Util.saveData(this,"name",name);

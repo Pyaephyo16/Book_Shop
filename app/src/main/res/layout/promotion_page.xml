@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Search">
+    tools:context=".PromotionPage">
 
     <LinearLayout
         android:id="@+id/appBar"
@@ -48,27 +48,52 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:layout_marginTop="0dp"
-
+        android:text="Promotion"
+        android:textAllCaps="true"
+        android:textColor="@color/primary"
+        android:textSize="22dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/custom_textfield"
-        android:orientation="horizontal">
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="20dp"
-            android:queryHint="Search Here"
-            />
-    </LinearLayout>
+        android:layout_marginBottom="16dp"
+        />
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginHorizontal="16dp"
+     android:orientation="horizontal">
+     <EditText
+         android:id="@+id/edtPromoName"
+         android:layout_width="match_parent"
+         android:background="@drawable/custom_textfield"
+         android:layout_height="50dp"
+         android:layout_weight="2"
+         android:textColorHint="@color/black"
+         android:textColor="@color/black"
+         android:hint="Enter Promotion Name..."
+         android:drawablePadding="6dp"
+         android:drawableStart="@drawable/promotion"
+         android:inputType="text"
+         android:singleLine="true"
+         android:paddingLeft="16dp" />
+     <Button
+         android:id="@+id/btnUpload"
+         android:layout_width="120dp"
+         android:layout_height="50dp"
+         android:text="Upload"
+         android:layout_marginLeft="16dp"
+         android:backgroundTint="@color/primary"
+         android:textColor="@color/white"
+         android:textSize="16dp"
+         />
+ </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

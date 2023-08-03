@@ -132,7 +132,7 @@ public class ForgetPassword extends AppCompatActivity implements Animation.Anima
         if (edtPassword.getText().length() >= 6){
             if(newPassword.length()>0 && confirmPassword.length()>0){
                 if (newPassword.equals(confirmPassword)){
-                    dbHelper.updateUser(model.getName(),inputPhone,model.getEmail(),newPassword,model.getProfile());
+                    dbHelper.updateUser(model.getName(),inputPhone,model.getEmail(),newPassword,model.getProfile(),model.getOwnBook());
                     startActivity(new Intent(ForgetPassword.this,Login.class));
                 }else{
                     Util.showToast(ForgetPassword.this,"New Password and Confirm Password must same");

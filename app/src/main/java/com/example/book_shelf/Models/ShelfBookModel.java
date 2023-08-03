@@ -14,7 +14,9 @@ public class ShelfBookModel {
     String shelfBookPages;
     String shelfBookType;
 
-    public ShelfBookModel(int shelfId, String shelfUserPhone, String shelfUserName, int shelfBookId, String shelfBookTitle, String shelfBookAuthor, String shelfBookPrice, String shelfBookPicture, String shelfBookDescription, String shelfBookPages, String shelfBookType) {
+    String orderDate;
+
+    public ShelfBookModel(int shelfId, String shelfUserPhone, String shelfUserName, int shelfBookId, String shelfBookTitle, String shelfBookAuthor, String shelfBookPrice, String shelfBookPicture, String shelfBookDescription, String shelfBookPages, String shelfBookType,String orderDate) {
         this.shelfId = shelfId;
         this.shelfUserPhone = shelfUserPhone;
         this.shelfUserName = shelfUserName;
@@ -26,6 +28,7 @@ public class ShelfBookModel {
         this.shelfBookDescription = shelfBookDescription;
         this.shelfBookPages = shelfBookPages;
         this.shelfBookType = shelfBookType;
+        this.orderDate = orderDate;
     }
 
     public int getShelfId() {
@@ -72,6 +75,10 @@ public class ShelfBookModel {
         return shelfBookType;
     }
 
+    public String getOrderDate() {
+        return orderDate;
+    }
+
     @Override
     public String toString() {
         return "ShelfBookModel{" +
@@ -86,6 +93,7 @@ public class ShelfBookModel {
                 ", shelfBookDescription='" + shelfBookDescription + '\'' +
                 ", shelfBookPages='" + shelfBookPages + '\'' +
                 ", shelfBookType='" + shelfBookType + '\'' +
+                ", orderDate='" + orderDate + '\'' +
                 '}';
     }
 }

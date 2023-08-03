@@ -53,7 +53,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
             holder.userCard.setBackground(admin_card);
         }
 
-        holder.userEmail.setText(model.getEmail());
+        holder.ownBook.setText(String.valueOf(model.getOwnBook()));
         holder.userName.setText(model.getName());
         holder.userPhone.setText(model.getPhone());
         BitmapFactory.Options opt = new BitmapFactory.Options();
@@ -71,14 +71,14 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView profile;
-        TextView userName,userPhone,userEmail;
+        TextView userName,userPhone,ownBook;
         LinearLayout userCard;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             profile = itemView.findViewById(R.id.profile);
             userName = itemView.findViewById(R.id.userName);
             userPhone = itemView.findViewById(R.id.userPhone);
-            userEmail = itemView.findViewById(R.id.userEmail);
+            ownBook = itemView.findViewById(R.id.ownBook);
             userCard = itemView.findViewById(R.id.userCard);
         }
     }

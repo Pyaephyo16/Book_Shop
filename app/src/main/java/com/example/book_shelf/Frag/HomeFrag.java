@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,25 +39,31 @@ import com.example.book_shelf.Util.Util;
 import com.example.book_shelf.VoucherPage;
 import com.example.book_shelf.db.DBHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFrag extends Fragment implements View.OnClickListener {
 
     View v;
-
     LinearLayout appBar;
     ImageView profile,cart,badgeImageView;
     EditText search;
 
     LinearLayout adminOnline;
 
-    LinearLayout comicBranch,novelBranch,pictureBookBranch,dcComicsBranch,marvelComicBranch,mangaBranch,horrorBranch,fantasyBranch,adviceForABettrLifeBranch,romanceBranch,storiesToSaveTheWorldBranch,newYorkBranch;
-    RecyclerView comicRecycler,novelRecycler,pictureBookRecycler,dcComicsRecycler,marvelComicRecycler,mangaRecycler,horrorRecycler,fantasyRecycler,adviceForABettrLifeRecycler,romanceRecycler,storiesToSaveTheWorldRecycler,newYorkRecycler;
-    BookRowAdapter comicBookRowAdapter,novelBookRowAdapter,pictureBookBookRowAdapter,dcComicsBookRowAdapter,marvelComicBookRowAdapter,mangaBookRowAdapter,horrorBookRowAdapter,fantasyBookRowAdapter,adviceForABettrLifeBookRowAdapter,romanceBookRowAdapter,storiesToSaveTheWorldBookRowAdapter,newYorkBookRowAdapter;
+    TextView promoTitle,startDate;
 
-    ImageView novelsTypeDetail,pictureBooksTypeDetail,comicsTypeDetail,dcComicsTypeDetail,marvelComicsTypeDetail,mangaTypeDetail,horrorTypeDetail,fantasyTypeDetail,adviceForABetterLifeTypeDetail,romanceTypeDetail,storiesToSaveTheWorldTypeDetail,newYorkTypeDetail;
+    LinearLayout comicBranch,novelBranch,pictureBookBranch,dcComicsBranch,marvelComicBranch,mangaBranch,horrorBranch,fantasyBranch,adviceForABettrLifeBranch,romanceBranch,storiesToSaveTheWorldBranch,newYorkBranch,promoBranch;
+    RecyclerView comicRecycler,novelRecycler,pictureBookRecycler,dcComicsRecycler,marvelComicRecycler,mangaRecycler,horrorRecycler,fantasyRecycler,adviceForABettrLifeRecycler,romanceRecycler,storiesToSaveTheWorldRecycler,newYorkRecycler,promoRecycler;
+    BookRowAdapter comicBookRowAdapter,novelBookRowAdapter,pictureBookBookRowAdapter,dcComicsBookRowAdapter,marvelComicBookRowAdapter,mangaBookRowAdapter,horrorBookRowAdapter,fantasyBookRowAdapter,adviceForABettrLifeBookRowAdapter,romanceBookRowAdapter,storiesToSaveTheWorldBookRowAdapter,newYorkBookRowAdapter,promoBookRowAdapter;
+
+    ImageView novelsTypeDetail,pictureBooksTypeDetail,comicsTypeDetail,dcComicsTypeDetail,marvelComicsTypeDetail,mangaTypeDetail,horrorTypeDetail,fantasyTypeDetail,adviceForABetterLifeTypeDetail,romanceTypeDetail,storiesToSaveTheWorldTypeDetail,newYorkTypeDetail,promoTypeDetail;
     String isAdmin = null;
     String name = null;
     String email = null;
@@ -79,6 +86,10 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
     List<BookModel> storiesToSaveTheWorldList = new ArrayList<>();
     List<BookModel> newYorkTimesBestSellersList = new ArrayList<>();
     List<BookModel> allBooks = new ArrayList<>();
+    List<BookModel> promoBookList = new ArrayList<>();
+    String promoDate = "";
+    String promotionName = null;
+    String promotionPercent = null;
 
     @Nullable
     @Override
@@ -133,6 +144,11 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         storiesToSaveTheWorldTypeDetail = v.findViewById(R.id.storiesToSaveTheWorldTypeDetail);
         newYorkTypeDetail = v.findViewById(R.id.newYorkTypeDetail);
         badgeImageView = v.findViewById(R.id.badgeImageView);
+        promoBranch = v.findViewById(R.id.promoBranch);
+        promoTitle = v.findViewById(R.id.promoTitle);
+        promoTypeDetail = v.findViewById(R.id.promoTypeDetail);
+        promoRecycler = v.findViewById(R.id.promoRecycler);
+        startDate = v.findViewById(R.id.startDate);
 
         if (Util.addToCardList.size()>0){
             badgeImageView.setVisibility(View.VISIBLE);
@@ -142,7 +158,10 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
 
         allBooks = dbHelper.getAllBooks();
         divdeBranch(allBooks);
+        getPromoBookList();
+        promoDate = Util.getData(context,"promotion");
 
+        promoSection(context);
         novelSection(context);
         pictureBookSection(context);
        comicSection(context);
@@ -155,8 +174,6 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
        romanceSection(context);
        storiesToSaveTheWorldSection(context);
        newYorkSection(context);
-
-
 
         isAdmin = Util.getData(context,"isAdmin");
         setupProfile(context);
@@ -176,6 +193,7 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         romanceTypeDetail.setOnClickListener(this);
         storiesToSaveTheWorldTypeDetail.setOnClickListener(this);
         newYorkTypeDetail.setOnClickListener(this);
+        promoTypeDetail.setOnClickListener(this);
 
 
         if (isAdmin.equals("true")){
@@ -192,6 +210,14 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         BitmapFactory.Options opt = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(image,opt);
         profile.setImageBitmap(bm);
+    }
+
+    private void getPromoBookList(){
+        for (BookModel bm : allBooks) {
+            if (!bm.getPromoPrice().equals("0")){
+                promoBookList.add(bm);
+            }
+        }
     }
 
     @Override
@@ -252,6 +278,10 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
             Intent i =new Intent(v.getContext(), List_By_Type.class);
             i.putExtra("bookType","New Your Times bestsellers");
             startActivity(i);
+        }else if (touch == R.id.promoTypeDetail){
+            Intent i = new Intent(v.getContext(), List_By_Type.class);
+            i.putExtra("bookType",promoBookList.get(0).getPromoName());
+            startActivity(i);
         }
     }
 
@@ -293,6 +323,9 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
                 Util.saveData(context,"email",null);
                 Util.saveData(context,"profile",null);
                 Util.saveData(context,"isAdmin",null);
+                Util.totalCost = 0;
+                Util.addToCardList.clear();
+                Util.promoList.clear();
                 startActivity(new Intent(getActivity(), Login.class));
             }
         });
@@ -328,6 +361,23 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         AlertDialog dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+    }
+
+    private void promoSection(Context context){
+        if (promoDate=="" || promoDate.equals("null")){
+            promoBranch.setVisibility(View.GONE);
+        }else{
+            promotionName = promoBookList.get(0).getPromoName();
+            promotionPercent = promoBookList.get(0).getPromoPercent();
+
+            promoTitle.setText(promotionName+" ("+promotionPercent+")");
+            startDate.setText("Start Date : "+promoDate);
+            promoRecycler.setHasFixedSize(true);
+            promoRecycler.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+
+            promoBookRowAdapter = new BookRowAdapter(context,promoBookList);
+            promoRecycler.setAdapter(promoBookRowAdapter);
+        }
     }
 
     private void novelSection(Context context){
@@ -501,5 +551,12 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+
+
+
+
+
+
 
 }

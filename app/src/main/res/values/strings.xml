@@ -4,6 +4,7 @@
     <string name="adminLogin"><u>Admin Login</u></string>
     <string name="logout"><u>Logout</u></string>
     <string name="edit"><u>Edit</u></string>
+    <string name="promo"><strike> 3000 MMK </strike> </string>
     <string name="requstphone">Provide your account\'s phone number for which you want to reset your password!</string>
     <string name="requstphone2">Don\'t worry.\nEnter your account\'s phone number and we\'ll send you a verification code to reset your password! </string>
 </resources>

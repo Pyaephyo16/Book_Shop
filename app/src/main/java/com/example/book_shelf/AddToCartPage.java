@@ -52,6 +52,7 @@ public class AddToCartPage extends AppCompatActivity implements Animation.Animat
 
     String address = null;
     int totalQty = 0;
+    int totalOwnByUser = 0;
 
     DBHelper dbHelper = new DBHelper(AddToCartPage.this);
 
@@ -156,7 +157,6 @@ public class AddToCartPage extends AppCompatActivity implements Animation.Animat
 
         if (touch == R.id.back){
             //finish();
-            Util.totalCost = 0;
             startActivity(new Intent(AddToCartPage.this, HomePage.class));
         }else if (touch == R.id.btnBuy){
             if (address!=null && address.length()>0){
@@ -179,12 +179,14 @@ public class AddToCartPage extends AppCompatActivity implements Animation.Animat
                 currentUserOrderList = dbHelper.getOrderByUser(user.getPhone());
                 currentUserLastOrderId = currentUserOrderList.get(currentUserOrderList.size()-1).getOrderId();
 
+                totalOwnByUser = user.getOwnBook()+totalQty;
+                dbHelper.updateUser(user.getName(),user.getPhone(),user.getEmail(),user.getPassword(),user.getProfile(),totalOwnByUser);
 
                 for (int p=0;p<selectedBookList.size();p++){
                     dbHelper.addOrderDetail(currentUserLastOrderId,selectedBookList.get(p).getBookId(),selectedBookList.get(p).getCurrentTake(),selectedBookList.get(p).getTitle());
-                    dbHelper.addUserShelf(user.getPhone(),user.getName(),selectedBookList.get(p).getBookId(),selectedBookList.get(p).getTitle(),selectedBookList.get(p).getAuthor(),selectedBookList.get(p).getPrice(),selectedBookList.get(p).getPicture(),selectedBookList.get(p).getDescription(),selectedBookList.get(p).getPages(),selectedBookList.get(p).getType());
+                    dbHelper.addUserShelf(user.getPhone(),user.getName(),selectedBookList.get(p).getBookId(),selectedBookList.get(p).getTitle(),selectedBookList.get(p).getAuthor(),selectedBookList.get(p).getPrice(),selectedBookList.get(p).getPicture(),selectedBookList.get(p).getDescription(),selectedBookList.get(p).getPages(),selectedBookList.get(p).getType(),currentDate);
                     int updateStock = selectedBookList.get(p).getStock() - selectedBookList.get(p).getCurrentTake();
-                    dbHelper.updateBook(String.valueOf(selectedBookList.get(p).getBookId()),selectedBookList.get(p).getTitle(),selectedBookList.get(p).getAuthor(),selectedBookList.get(p).getPrice(),selectedBookList.get(p).getPicture(),selectedBookList.get(p).getDescription(),selectedBookList.get(p).getPages(),selectedBookList.get(p).getType(),updateStock);
+                    dbHelper.updateBook(String.valueOf(selectedBookList.get(p).getBookId()),selectedBookList.get(p).getTitle(),selectedBookList.get(p).getAuthor(),selectedBookList.get(p).getPrice(),selectedBookList.get(p).getPicture(),selectedBookList.get(p).getDescription(),selectedBookList.get(p).getPages(),selectedBookList.get(p).getType(),updateStock,selectedBookList.get(p).getPromoPrice(),selectedBookList.get(p).getPromoPercent(),selectedBookList.get(p).getPromoName());
                 }
 
                 Intent intent = new Intent(this, VoucherPage.class);

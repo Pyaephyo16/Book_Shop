@@ -254,7 +254,10 @@ public class ChangeBookData extends AppCompatActivity implements Animation.Anima
                             description,
                             pages,
                             type,
-                            stock
+                            stock,
+                            model.getPromoPrice(),
+                            model.getPromoPercent(),
+                            model.getPromoName()
                     );
                     startActivity(new Intent(ChangeBookData.this, HomePage.class));
                 }else{

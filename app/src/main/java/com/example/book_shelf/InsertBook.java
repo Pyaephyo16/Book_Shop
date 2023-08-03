@@ -167,7 +167,10 @@ public class InsertBook extends AppCompatActivity implements View.OnClickListene
                             description,
                             pages,
                             type,
-                            stock
+                            stock,
+                            "0",
+                            "0",
+                            ""
                     );
                     finish();
                 }else{

@@ -17,6 +17,7 @@ import com.example.book_shelf.Helper.BookAdapter;
 import com.example.book_shelf.Helper.BookRowAdapter;
 import com.example.book_shelf.Helper.TypeBookAdapter;
 import com.example.book_shelf.Models.BookModel;
+import com.example.book_shelf.Util.Util;
 import com.example.book_shelf.db.DBHelper;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class List_By_Type extends AppCompatActivity implements Animation.Animati
     public String bookType = null;
 
     Animation fade_in,fade_out;
+
+    String promoDate = "";
 
     DBHelper dbHelper = new DBHelper(List_By_Type.this);
     List<BookModel> allBookList = new ArrayList<>();
@@ -59,8 +62,16 @@ public class List_By_Type extends AppCompatActivity implements Animation.Animati
         bookType = getIntent().getStringExtra("bookType");
         typeName.setText(bookType);
 
+        promoDate = Util.getData(this,"promotion");
+
         allBookList = dbHelper.getAllBooks();
-        divdeBranch(allBookList);
+        System.out.println("list by type "+promoDate);
+        if (bookType.equals("Novels") || bookType.equals("Picture Books") || bookType.equals("Comics") || bookType.equals("DC Comics") || bookType.equals("Marvel Comics") || bookType.equals("Manga") || bookType.equals("Horror") || bookType.equals("Fantasy") || bookType.equals("Advice for a better life") || bookType.equals("Romance") || bookType.equals("Stories to save the world") || bookType.equals("New Your Times bestsellers")) {
+            divdeBranch(allBookList);
+        }else{
+            getPromoBookList(allBookList);
+        }
+
 
         typeRecycler.setHasFixedSize(true);
         typeRecycler.setLayoutManager(new GridLayoutManager(this,2));
@@ -108,6 +119,14 @@ public class List_By_Type extends AppCompatActivity implements Animation.Animati
     private void divdeBranch(List<BookModel> allBooks){
         for (BookModel bm : allBooks) {
             if (bm.getType().equals(bookType)){
+                bookByTypeList.add(bm);
+            }
+        }
+    }
+
+    private void getPromoBookList(List<BookModel> allBooks){
+        for (BookModel bm : allBooks) {
+            if (!bm.getPromoPrice().equals("0")){
                 bookByTypeList.add(bm);
             }
         }

@@ -30,11 +30,17 @@ import com.example.book_shelf.AdminOrderView;
 import com.example.book_shelf.AdminUserView;
 import com.example.book_shelf.InsertBook;
 import com.example.book_shelf.Login;
+import com.example.book_shelf.Models.BookModel;
 import com.example.book_shelf.R;
 import com.example.book_shelf.Search;
 import com.example.book_shelf.SearchForDelete;
+import com.example.book_shelf.SearchForPromo;
 import com.example.book_shelf.UpdateBook;
 import com.example.book_shelf.Util.Util;
+import com.example.book_shelf.db.DBHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFrag extends Fragment implements View.OnClickListener, Animation.AnimationListener {
 
@@ -42,6 +48,8 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
     LinearLayout appBar;
     ImageView profile;
     EditText search;
+
+    String promoDate = null;
 
     Button insertExpand,updateExpand,deleteExpand,promotionExpand;
 
@@ -56,6 +64,10 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
     String email = null;
     String profilePath = null;
 
+    DBHelper dbHelper;
+
+    List<BookModel> bookList = new ArrayList<>();
+
 
 
     @Nullable
@@ -63,6 +75,7 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.dashboard_frag,container,false);
         Context context = getContext();
+        dbHelper = new DBHelper(context);
         fade_in_text = AnimationUtils.loadAnimation(context,R.anim.fade_in_text);
         fade_out_text = AnimationUtils.loadAnimation(context,R.anim.fade_out_text);
         fade_in_text.setAnimationListener(this);
@@ -92,6 +105,11 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
         promotionExpand.startAnimation(fade_in_text);
 
         isAdmin = Util.getData(context,"isAdmin");
+        promoDate = Util.getData(context,"promotion");
+        System.out.println("promodate in dashboard "+promoDate+"    "+Util.promoList.size());
+
+        bookList = dbHelper.getAllBooks();
+
         setupProfile(context);
 
         search.setOnClickListener(this);
@@ -131,9 +149,15 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
         }else if (touch == R.id.deleteCard){
             startActivity(new Intent(getActivity(), SearchForDelete.class));
         }else if (touch == R.id.promotionCard){
-
+            //if (promoDate==null) {
+                startActivity(new Intent(getActivity(), SearchForPromo.class));
+//            }else{
+//                promoEndDialog();
+//            }
         }
     }
+
+
 
     private void profileDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -172,6 +196,9 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
                 Util.saveData(context,"email",null);
                 Util.saveData(context,"profile",null);
                 Util.saveData(context,"isAdmin",null);
+                Util.totalCost = 0;
+                Util.addToCardList.clear();
+                Util.promoList.clear();
                 startActivity(new Intent(getActivity(), Login.class));
             }
         });
@@ -231,4 +258,6 @@ public class DashboardFrag extends Fragment implements View.OnClickListener, Ani
     public void onAnimationRepeat(Animation animation) {
 
     }
+
+
 }

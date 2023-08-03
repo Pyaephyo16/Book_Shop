@@ -113,6 +113,63 @@
             </FrameLayout>
 
         </LinearLayout>
+
+        <!--    Promotion-->
+        <LinearLayout
+            android:id="@+id/promoBranch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/promoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/secondary"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"
+                    android:text="Promotion"/>
+                <ImageView
+                    android:id="@+id/promoTypeDetail"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/right"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textSize="16dp"
+                android:textColor="@color/red"
+                android:textStyle="normal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:text="From 3-8-2023 to 5-6-2023"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/promoRecycler"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+
         <!--    Novels-->
         <LinearLayout
             android:id="@+id/novelBranch"

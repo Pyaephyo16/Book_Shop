@@ -37,7 +37,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         Collections.sort(Util.addToCardList);
 
         for (int k=0;k < bookList.size();k++){
-                Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPrice());
+               if (bookList.get(k).getPromoPrice().equals("0")){
+                   Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPrice());
+               }else{
+                   Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPromoPrice());
+               }
         }
 
         for (int j=0;j<Util.addToCardList.size();j++){
@@ -79,7 +83,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                         holder.takeCount.setText(String.valueOf(model.getCurrentTake()));
                         //Util.showToast(context,model.getTitle()+"  "+currentTake);
 
-                        ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),1);
+                        if (model.getPromoPrice().equals("0")){
+                            ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),1);
+                        }else{
+                            ((AddToCartPage) v.getContext()).updatePrice(model.getPromoPrice(),1);
+                        }
                     }
                 }
             }
@@ -92,7 +100,12 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     model.decreaseCurrentTake();
                     holder.takeCount.setText(String.valueOf(model.getCurrentTake()));
                     //Util.showToast(context,model.getTitle()+"  "+currentTake);
-                    ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),2);
+
+                    if (model.getPromoPrice().equals("0")){
+                        ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),2);
+                    }else{
+                        ((AddToCartPage) v.getContext()).updatePrice(model.getPromoPrice(),2);
+                    }
                 }
             }
         });
@@ -106,7 +119,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     for (int j=0;j<Util.addToCardList.size();j++){
                         int id = Util.addToCardList.get(j);
                         if (id==model.getBookId()){
-                            //Util.showToast(context,"Remove "+model.getTitle());
                             bookList.remove(j);
                             ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),0);
 
@@ -129,11 +141,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
     public String bookPrice(String current){
         Util.totalCost-=Integer.parseInt(current);
         System.out.println("price remove "+Util.totalCost+"    "+"book "+current);
-//        if (currentTake > 1){
-//            for (int i=1;i<currentTake;i++){
-//                Util.totalCost -= Integer.parseInt(current);
-//            }
-//        }
         return String.valueOf(Util.totalCost);
     }
 

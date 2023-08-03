@@ -14,9 +14,13 @@ public class BookModel {
 
     int currentTake = 1;
 
+    String promoPrice;
+    String promoPercent;
+    String promoName;
+
     public BookModel(){}
 
-    public BookModel(int bookId, String title, String author, String price, String picture, String description, String pages,String type,int stock,int currentTake) {
+    public BookModel(int bookId, String title, String author, String price, String picture, String description, String pages,String type,int stock,int currentTake,String promoPrice,String promoPercent,String promoName) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
@@ -27,6 +31,9 @@ public class BookModel {
         this.stock = stock;
         this.description = description;
         this.currentTake = currentTake;
+        this.promoPrice = promoPrice;
+        this.promoPercent = promoPercent;
+        this.promoName = promoName;
     }
 
     public int getBookId() {
@@ -69,6 +76,30 @@ public class BookModel {
         return currentTake;
     }
 
+    public String getPromoPrice() {
+        return promoPrice;
+    }
+
+    public String getPromoPercent() {
+        return promoPercent;
+    }
+
+    public String getPromoName() {
+        return promoName;
+    }
+
+    public void setPromoPrice(String promoPrice) {
+        this.promoPrice = promoPrice;
+    }
+
+    public void setPromoPercent(String promoPercent) {
+        this.promoPercent = promoPercent;
+    }
+
+    public void setPromoName(String promoName) {
+        this.promoName = promoName;
+    }
+
     public int increaseCurrentTake(){
         currentTake++;
         return  currentTake;
@@ -94,6 +125,9 @@ public class BookModel {
                 ", stock=" + stock +
                 ", description='" + description + '\'' +
                 ", currentTake=" + currentTake +
+                ", promoPrice='" + promoPrice + '\'' +
+                ", promoPercent='" + promoPercent + '\'' +
+                ", promoName='" + promoName + '\'' +
                 '}';
     }
 }

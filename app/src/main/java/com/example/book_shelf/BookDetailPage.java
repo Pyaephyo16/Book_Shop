@@ -107,7 +107,13 @@ public class BookDetailPage extends AppCompatActivity implements Animation.Anima
             txtIdData.setText(String.valueOf(model.getBookId()));
             txtTitleData.setText(model.getTitle());
             txtAuthorData.setText(model.getAuthor());
-            txtPriceData.setText(model.getPrice());
+
+            if (model.getPromoPrice().equals("0")){
+                txtPriceData.setText(model.getPrice());
+            }else{
+                txtPriceData.setText(model.getPromoPrice());
+            }
+
             txtPagesData.setText(model.getPages());
             txtStockData.setText(String.valueOf(model.getStock()));
             txtTypeData.setText(model.getType());
@@ -144,7 +150,6 @@ public class BookDetailPage extends AppCompatActivity implements Animation.Anima
             }else{
                 Util.showToast(this,"Added to cart");
                 Util.addToCardList.add(model.getBookId());
-               // Util.totalCost = Util.totalCost+Integer.parseInt(model.getPrice());
             }
         }
     }

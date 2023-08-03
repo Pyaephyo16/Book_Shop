@@ -164,6 +164,9 @@ public class LibraryFrag extends Fragment implements View.OnClickListener {
                 Util.saveData(context,"email",null);
                 Util.saveData(context,"profile",null);
                 Util.saveData(context,"isAdmin",null);
+                Util.totalCost = 0;
+                Util.addToCardList.clear();
+                Util.promoList.clear();
                 startActivity(new Intent(getActivity(), Login.class));
             }
         });

@@ -9,15 +9,18 @@ public class UserModel {
     String profile;
     String isAdmin;
 
+    int ownBook = 0;
+
     public UserModel(){}
 
-    public UserModel(String name, String phone, String email, String password, String profile, String isAdmin) {
+    public UserModel(String name, String phone, String email, String password, String profile, String isAdmin,int ownBook) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.password = password;
         this.profile = profile;
         this.isAdmin = isAdmin;
+        this.ownBook = ownBook;
     }
 
     public String getName() {
@@ -44,6 +47,10 @@ public class UserModel {
         return isAdmin;
     }
 
+    public int getOwnBook() {
+        return ownBook;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -53,6 +60,7 @@ public class UserModel {
                 ", password='" + password + '\'' +
                 ", profile='" + profile + '\'' +
                 ", isAdmin='" + isAdmin + '\'' +
+                ", ownBook='" + ownBook + '\'' +
                 '}';
     }
 }
