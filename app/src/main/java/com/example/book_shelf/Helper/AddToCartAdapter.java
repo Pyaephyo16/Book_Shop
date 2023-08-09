@@ -38,9 +38,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
 
         for (int k=0;k < bookList.size();k++){
                if (bookList.get(k).getPromoPrice().equals("0")){
-                   Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPrice());
+                       Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPrice());
+
                }else{
-                   Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPromoPrice());
+                      Util.totalCost = Util.totalCost + Integer.parseInt(bookList.get(k).getPromoPrice());
+
                }
         }
 
@@ -64,6 +66,12 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
 
         BookModel model =bookList.get(position);
 
+        if (model.getPromoPrice().equals("0")){
+            holder.priceText.setText(model.getPrice());
+        }else{
+            holder.priceText.setText(model.getPromoPrice());
+        }
+
         BitmapFactory.Options opt = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(model.getPicture(),opt);
         holder.book.setImageBitmap(bm);
@@ -81,7 +89,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                     if (model.getCurrentTake()<stock){
                         model.increaseCurrentTake();
                         holder.takeCount.setText(String.valueOf(model.getCurrentTake()));
-                        //Util.showToast(context,model.getTitle()+"  "+currentTake);
 
                         if (model.getPromoPrice().equals("0")){
                             ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),1);
@@ -99,7 +106,6 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                 if (model.getCurrentTake()>1){
                     model.decreaseCurrentTake();
                     holder.takeCount.setText(String.valueOf(model.getCurrentTake()));
-                    //Util.showToast(context,model.getTitle()+"  "+currentTake);
 
                     if (model.getPromoPrice().equals("0")){
                         ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),2);
@@ -120,7 +126,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
                         int id = Util.addToCardList.get(j);
                         if (id==model.getBookId()){
                             bookList.remove(j);
-                            ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),0);
+                            if(model.getPromoPrice().equals("0")){
+                                ((AddToCartPage) v.getContext()).updatePrice(model.getPrice(),0);
+                            }else{
+                                ((AddToCartPage) v.getContext()).updatePrice(model.getPromoPrice(),0);
+                            }
 
                             notifyItemRemoved(j);
                             Util.addToCardList.remove(j);
@@ -139,7 +149,8 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
     }
 
     public String bookPrice(String current){
-        Util.totalCost-=Integer.parseInt(current);
+            Util.totalCost-=Integer.parseInt(current);
+
         System.out.println("price remove "+Util.totalCost+"    "+"book "+current);
         return String.valueOf(Util.totalCost);
     }
@@ -150,15 +161,11 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
         return String.valueOf(Util.totalCost);
     }
 
-    public void fixPrice(){
-
-    }
-
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView book;
-        TextView bookTitle,takeCount,stock;
+        TextView bookTitle,takeCount,stock,priceText;
         LinearLayout btnIncrease,btnDecrease,btnRemove;
 
 
@@ -171,6 +178,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.View
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnRemove = itemView.findViewById(R.id.btnRemove);
+            priceText = itemView.findViewById(R.id.priceText);
         }
     }
 }

@@ -31,18 +31,55 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Book Name"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/primary"
             android:textSize="24dp"
-            android:layout_marginTop="4dp"
             android:textStyle="bold"
             />
 
+<!--        price-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price -   "
+                android:textColor="@color/secondary"
+                android:textSize="16dp"
+                android:maxLines="1"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:id="@+id/priceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2000"
+                android:textColor="@color/secondary"
+                android:textSize="16dp"
+                android:maxLines="1"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MMK"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/secondary"
+                android:textSize="16dp"
+                android:maxLines="1"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+<!--        Order-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -51,7 +88,6 @@
                 android:textColor="@color/secondary"
                 android:textSize="16dp"
                 android:maxLines="1"
-                android:layout_marginBottom="16dp"
                 android:textStyle="normal"
                 />
             <TextView
@@ -62,7 +98,6 @@
                 android:textColor="@color/secondary"
                 android:textSize="16dp"
                 android:maxLines="1"
-                android:layout_marginBottom="16dp"
                 android:textStyle="normal"
                 />
             <TextView
@@ -72,7 +107,6 @@
                 android:textColor="@color/secondary"
                 android:textSize="16dp"
                 android:maxLines="1"
-                android:layout_marginBottom="16dp"
                 android:textStyle="normal"
                 />
             <TextView
@@ -83,7 +117,6 @@
                 android:textColor="@color/secondary"
                 android:textSize="16dp"
                 android:maxLines="1"
-                android:layout_marginBottom="16dp"
                 android:textStyle="normal"
                 />
         </LinearLayout>
@@ -91,6 +124,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -100,7 +134,7 @@
                 android:orientation="horizontal">
                 <!--            add-->
                 <LinearLayout
-                    android:id="@+id/btnIncrease"
+                    android:id="@+id/btnDecrease"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:background="@drawable/btn_left"
@@ -109,11 +143,11 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/add"/>
+                        android:src="@drawable/decrease"/>
                 </LinearLayout>
                 <!--            decrease-->
                 <LinearLayout
-                    android:id="@+id/btnDecrease"
+                    android:id="@+id/btnIncrease"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:background="@drawable/btn_right"
@@ -122,7 +156,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/decrease"/>
+                        android:src="@drawable/add"/>
                 </LinearLayout>
             </LinearLayout>
 

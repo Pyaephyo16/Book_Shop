@@ -157,6 +157,7 @@ public class AddToCartPage extends AppCompatActivity implements Animation.Animat
 
         if (touch == R.id.back){
             //finish();
+            Util.totalCost=0;
             startActivity(new Intent(AddToCartPage.this, HomePage.class));
         }else if (touch == R.id.btnBuy){
             if (address!=null && address.length()>0){
